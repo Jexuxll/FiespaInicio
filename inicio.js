@@ -634,64 +634,73 @@ const capitulos = [
     pasos: [
       {
         mensajes: [
-          "¿Sigues ahí? El agua de la bañera está negra.",
-          "Llevo horas dentro.",
-          "O días, no lo sé.",
-          "He entendido el mensaje.",
-          "La individualidad es nuestro mayor defecto.",
-          "En la profundidad, todos nadan juntos.",
-          "Todos son uno."
+          () => `${(nombreJugador || "Usuario")}, hola. Siento haberme puesto a la defensiva el otro día.`,
+          "He estado releyendo nuestras conversaciones y... la verdad, no sé de qué paranoia me hablabas",
+          "Estoy perfectamente",
+          "Supongo que solo necesitaba mi espacio"
         ]
       },
       {
         opciones: [
           {
-            texto: "Intentar hacerle entrar en razón",
-            valor: "Intentar hacerle entrar en razón 👍",
+            texto: "Dudar",
+            valor: "IR +10",
             mensajes: [
-              "Te estás perdiendo.",
-              "Lucha contra eso, recuerda quién eres."
+              "¿Cómo que perfectamente?",
+              "¡Estabas aterrado, decías que te perseguían!",
+              "¿Por qué hablamos por aquí, entonces?"
+            ],
+            respuesta: [
+              "Ah… ya. No sé, sería cosa de la fiebrre, no lo recuerdo",
+              "Lo que sí recuerdo es haber rotto el movbil, así que me temo que esta es la única manera de seguir en contactpoç"
             ]
           },
           {
-            texto: "Entender y aceptar",
-            valor: "Entender y aceptar 😡",
+            texto: "Curiosear",
+            valor: "IR -10",
             mensajes: [
-              "Suena a que has encontrado la paz que buscabas."
+              "Me alegro de que estés mejor, pero dabas bastante mal rollo...",
+              "¿Qué ha cambiado?"
             ]
           }
         ],
         respuesta: [ 
-              () => `He estado analizando tu patrón de respuestas, ${(nombreJugador || "Usuario")}.`,
-              "La muestra me pide que seleccione a los aptos.",
-              "No todos pueden sobrevivir a la inmensa presión del abismo."
+              "Verás… Ahora somos uno. Y lo entiendo todo. Él no es un pparásito",
+              "Es... una mejorra. Mi mente está cvristalina",
+              "Es conmo si llevara toda mi vida respirando a medias y por fin hubiera lllenado los pulmones de vberdadç"
         ]
       },
       {
         opciones: [
           {
-            texto: "Mostrar rechazo",
-            valor: "Mostrar rechazo 👍",
+            texto: "Asustarse",
+            valor: "IR +10",
             mensajes: [
-            "Ni se te ocurra acercarte a mí con esa cosa."
+            "Pablo, me estás dando miedo",
+            "Hablas como si te hubieran lavado el cerebro"
             ]
           },
           {
-            texto: "Unirte a él",
-            valor: "Unirte a él 😡",
+            texto: "Escuchar",
+            valor: "IR -10",
             mensajes: [
-            "¿Y bien?", 
-            "¿Crees que yo sería apta para el cambio?"
+            "Suena una locura, pero transmites mucha paz", 
+            "¿Y ahora qué vas a hacer?"
             ]
           }
         ],
         respuesta: [ 
-              "El cristal de la pantalla se está empañando por dentro.",
-              "Ya casi no veo las letras brillantes.",
-              "El baño se me ha quedado pequeño.",
-              "El océano llama.",
-              "Te diré dónde ir.",
-              "Pronto."
+              "Ahora veo a la gente por la calle y me dais ppena. Estáis todos tan secos",
+              "Camináis aislados, llenos de estrés, de ansiedad... El no quiere nada de eso",
+              "Siento que formo parte de algo más, ojalá pudieras sentirloç",
+              "Me he dado cuenta de que no puedo ghuardarme esto para nmi. Es mi nuevo propósito",
+              "He estado pensanddo mucho en vosotrosd, en mis amigos. No podéis quedaros así",
+              "Aúnm no sé myuy bien cómo hsacerlo",
+              "Tengo la garganta súper rreseca y me cuesta tecleawr porque mis dedos segregan una esspecie de aceite continuuio",
+              "Voy a sumerggirme un rato en el agua dffría para pensar con claridad en el siguiente paspo",
+              "Conéctatye dentro de un parr dfe días",
+              "Para entonces tendré umn plan para que podamos vernosç",
+              () => `Descamnsa, ${(nombreJugador || "Usuario")}`
         ]
       }
     ]
@@ -699,7 +708,7 @@ const capitulos = [
 
   {
     id: "CHAT_05",
-    fecha: "2026-05-02",
+    fecha: "2026-05-03",
     pasos: [
       {
         mensajes: [
