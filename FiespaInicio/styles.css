@@ -1,0 +1,968 @@
+@font-face{
+font-family:"terminal";
+src:url("/fonts/SGK075.ttf") format("truetype");
+}
+
+:root {
+  --crt-green: #33ff33;
+  --crt-bg: #020402;
+  --terminal-max-width: 980px;
+  --terminal-padding: clamp(12px, 2.6vw, 30px);
+  --terminal-margin: clamp(8px, 2.5vw, 40px);
+  --text-base: clamp(18px, 2.1vw, 39px);
+  --text-login: clamp(28px, 5.4vw, 70px);
+  --text-system: clamp(20px, 3vw, 37px);
+  --text-button: clamp(18px, 2.8vw, 37px);
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--crt-bg);
+  font-family: "terminal", monospace;
+  color: var(--crt-green);
+  font-size: var(--text-base);
+  overflow: hidden;
+  padding: 0;
+}
+
+.terminal {
+  box-sizing: border-box;
+  width: min(100% - (var(--terminal-margin) * 2), var(--terminal-max-width));
+  margin: var(--terminal-margin) auto;
+  padding: var(--terminal-padding);
+  border: 2px solid var(--crt-green);
+  box-shadow: 0 0 20px var(--crt-green);
+  min-height: calc((var(--vh, 1vh) * 100) - (var(--terminal-margin) * 2));
+  height: calc((var(--vh, 1vh) * 100) - (var(--terminal-margin) * 2));
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-shadow: 0 0 4px var(--crt-green);
+}
+
+.terminal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,0,0.03),
+    rgba(0,255,0,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+#login {
+  font-size: var(--text-login);
+  text-align: center;
+}
+
+#login .p1 {
+  margin: clamp(30px, 8vh, 94px) 0 0 0;
+}
+
+#login .p2 {
+  margin: 20px 0 clamp(24px, 7vh, 70px) 0;
+  color: #9b0000;
+  text-shadow: #9b0000 0 0 4px;
+}
+
+.linea {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.linea-centro {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#login .linea-centro span {
+  margin-top: clamp(18px, 8vh, 94px);
+  font-size: var(--text-login);
+}
+
+#login .linea-centro input {
+  width: min(70%, 560px);
+  text-align: center;
+  font-size: var(--text-login);
+  margin-top: clamp(12px, 4vh, 50px);
+}
+
+input {
+  background: transparent;
+  border: none;
+  color: var(--crt-green);
+  font-family: inherit;
+  font-size: clamp(20px, 4.4vw, 51px);
+  outline: none;
+}
+
+.error {
+  text-shadow:0 0 4px red;
+  color: red;
+  text-align: center;
+  width: 100%;
+  margin-top: clamp(12px, 4vh, 50px);
+  font-size: var(--text-login);
+  margin-bottom: 20px;
+}
+
+.submitOculto {
+  display: none;
+}
+
+/* SISTEMA */
+#sistema {
+  font-size: clamp(18px, 2.4vw, 30px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+#saludo {
+  font-size: clamp(24px, 4.2vw, 55px);
+  margin: 30px 0px 15px 0px;
+  padding-bottom: 40px;
+  color: #7fff7f;
+  text-shadow: #7fff7f 0 0 4px;
+  border-bottom: #33ff33 2px solid;
+}
+
+#sistema.oculto #saludo {
+  border-bottom: none;
+}
+
+/* CHAT */
+.visorCapitulo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#mensajes {
+  flex: 1;
+  overflow-y: auto;
+  padding: clamp(10px, 1.8vw, 20px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 1.4vw, 12px);
+  min-height: 0;
+}
+
+#opciones {
+  padding: clamp(10px, 1.8vw, 15px);
+  background: var(--crt-bg);
+  flex-shrink: 0; /* evita que se mueva */
+}
+
+.terminal.activo #opciones {
+  border-top: 1px solid #33ff33;
+}
+
+.chat {
+  background: var(--crt-bg);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* clave para que el scroll funcione */
+  min-height: 0;
+}
+
+.mensajeSistema{
+  color: var(--crt-green);
+  font-size: var(--text-system);
+  max-width:80%;
+  padding:2px 14px;
+  overflow-wrap: anywhere;
+}
+
+.mensajeServidor {
+  font-size: clamp(15px, 2.3vw, 29px);
+  padding: 8px 14px;
+  color: #7aff7a;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.3;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.mensajeServidorUnion {
+  margin-bottom: 38px;
+}
+
+.mensajeServidorSalida {
+  margin-top: 38px;
+}
+
+.mensajeEstadoMicro {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: clamp(15px, 1.45vw, 23px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7aff7a;
+}
+
+.mensajeEstadoMicro.activo {
+  color: #94ff94;
+  text-shadow: 0 0 7px rgba(122, 255, 122, 0.85);
+}
+
+.mensajeEstadoMicro::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4c4c;
+  box-shadow: 0 0 7px rgba(255, 76, 76, 0.85);
+}
+
+.mensajeEstadoMicro.activo::before {
+  background: #33ff33;
+  box-shadow: 0 0 7px rgba(96, 255, 96, 0.85);
+  animation: pulsoMicro 1s ease-in-out infinite;
+}
+
+.fechaCapitulo {
+  color: #7aff7a;
+  text-align: center;
+  font-size: 24px;
+  margin: 12px 0;
+  opacity: 0.8;
+}
+
+.mensajeJugador{
+  color:#85ff85;
+  font-size: var(--text-system);
+  text-align:right;
+  align-self:flex-end;
+  max-width:80%;
+  padding:2px 14px;
+  overflow-wrap: anywhere;
+}
+
+.mensajeSistema,
+.mensajeJugador{
+  animation: aparecer 0.4s ease;
+}
+
+.mensajeTemporalOcultando {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.24s ease, transform 0.24s ease;
+}
+
+.mensajeAudioDirecto {
+  max-width: 88%;
+  padding: 0;
+}
+
+.audioDirecto {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  padding: 10px 12px;
+  min-height: 92px;
+}
+
+.audioDirectoOndas {
+  position: relative;
+  height: 64px;
+  display: grid;
+  grid-template-columns: repeat(40, minmax(0, 1fr));
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+}
+
+.audioDirectoOndas::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, transparent);
+  opacity: 0.75;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.audioDirectoOnda {
+  --amp: 1.45;
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(
+    to top,
+    rgba(122, 255, 122, 0.65) 0%
+  );
+  transform: scaleY(0.08);
+  transform-origin: center center;
+  opacity: 0.45;
+  will-change: transform, opacity;
+}
+
+.audioDirectoOnda:nth-child(5n) {
+  --amp: 1.7;
+}
+
+.audioDirectoOnda:nth-child(5n + 1) {
+  --amp: 1.2;
+}
+
+.audioDirectoOnda:nth-child(5n + 2) {
+  --amp: 1.95;
+}
+
+.audioDirectoOnda:nth-child(5n + 3) {
+  --amp: 1.35;
+}
+
+.mensajeAudioDirecto.activo .audioDirectoOnda {
+  animation-name: ondaDirecto;
+  animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.35, 0, 0.65, 1);
+  animation-delay: calc(var(--d, 0s) * -1);
+}
+
+.mensajeAudioDirecto.activo .audioDirectoOnda:nth-child(4n) {
+  animation-duration: 1.45s;
+}
+
+.mensajeAudioDirecto.activo .audioDirectoOnda:nth-child(4n + 1) {
+  animation-duration: 1.05s;
+}
+
+.mensajeAudioDirecto.activo .audioDirectoOnda:nth-child(4n + 2) {
+  animation-duration: 1.3s;
+}
+
+.mensajeAudioDirecto.cerrando .audioDirectoOnda {
+  animation: cierreOnda 0.34s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes ondaDirecto {
+  0% {
+    transform: scaleY(0.08);
+    opacity: 0.35;
+  }
+  20% {
+    transform: scaleY(var(--amp));
+    opacity: 0.95;
+  }
+  38% {
+    transform: scaleY(0.34);
+    opacity: 0.5;
+  }
+  55% {
+    transform: scaleY(calc(var(--amp) * 0.8));
+    opacity: 0.78;
+  }
+  74% {
+    transform: scaleY(0.3);
+    opacity: 0.46;
+  }
+  100% {
+    transform: scaleY(0.08);
+    opacity: 0.35;
+  }
+}
+
+@keyframes cierreOnda {
+  0% {
+    transform: scaleY(0.42);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleY(0.08);
+    opacity: 0.32;
+  }
+}
+
+@keyframes pulsoMicro {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.92);
+    opacity: 0.5;
+  }
+}
+
+@keyframes aparecer{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+#opciones button {
+  width: 100%;
+  text-align: left;
+  margin-top: clamp(8px, 1.5vw, 10px);
+  font-size: var(--text-system);
+  padding: clamp(9px, 2.1vw, 14px);
+  min-height: 51px;
+}
+
+button {
+  background: transparent;
+  border: 1px solid var(--crt-green);
+  color: var(--crt-green);
+  padding: clamp(8px, 1.5vw, 10px);
+  font-family: inherit;
+  font-size: clamp(17px, 2.4vw, 33px);
+  cursor: pointer;
+}
+
+button:hover{
+  background:#33ff33;
+  color:#020402;
+  box-shadow:0 0 8px #33ff33;
+}
+
+.oculto {
+  display: none;
+}
+
+#mensajes::-webkit-scrollbar {
+  width: 6px;
+}
+
+#mensajes::-webkit-scrollbar-thumb {
+  background: #33ff33;
+}
+.cursor::after{
+  content: "_";
+  animation: parpadeo 1s infinite;
+}
+
+@keyframes parpadeo{
+  0%{opacity:1}
+  50%{opacity:0}
+  100%{opacity:1}
+}
+
+.inputNombre {
+  box-sizing: border-box;
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--crt-green);
+  color: var(--crt-green);
+  font-family: inherit;
+  font-size: var(--text-system);
+  line-height: 1.15;
+  padding: clamp(8px, 1.8vw, 12px);
+  outline: none;
+}
+
+@media (max-width: 992px) {
+  body {
+    font-size: clamp(44px, 8vw, 64px);
+  }
+
+  #login {
+    font-size: clamp(46px, 9vw, 66px);
+  }
+
+  #loginForm {
+    margin-top: clamp(70px, 16vh, 130px);
+  }
+
+  .terminal {
+    width: min(100% - 24px, var(--terminal-max-width));
+    margin: 12px auto;
+    min-height: calc((var(--vh, 1vh) * 100) - 24px);
+    height: calc((var(--vh, 1vh) * 100) - 24px);
+    font-size: 64px;
+  }
+
+  #login .linea-centro span {
+    font-size: clamp(46px, 9vw, 66px);
+  }
+
+  #login .linea-centro input {
+    width: min(90%, 560px);
+    font-size: clamp(44px, 8vw, 64px);
+  }
+
+  .error {
+    font-size: clamp(40px, 7vw, 58px);
+  }
+
+  #sistema {
+    font-size: clamp(34px, 5.8vw, 52px);
+  }
+
+  #saludo {
+    font-size: clamp(38px, 6.4vw, 58px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(32px, 5.2vw, 48px);
+  }
+
+  .mensajeServidor {
+    font-size: clamp(25px, 4vw, 37px);
+  }
+
+  #opciones button {
+    font-size: clamp(32px, 5.2vw, 48px);
+  }
+
+  .fechaCapitulo {
+    font-size: clamp(28px, 4vw, 40px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(28px, 4vw, 40px);
+    padding: clamp(8px, 1.5vw, 12px) clamp(12px, 2vw, 18px);
+    gap: clamp(8px, 1.3vw, 12px);
+  }
+
+  .mensajeEstadoMicro::before {
+    width: clamp(13px, 1.7vw, 17px);
+    height: clamp(13px, 1.7vw, 17px);
+  }
+
+  .audioDirecto {
+    padding: 12px 14px;
+    min-height: 104px;
+  }
+
+  .audioDirectoOndas {
+    height: 68px;
+    gap: 4px;
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    max-width: 88%;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: clamp(58px, 34vw, 84px);
+  }
+
+  #login {
+    font-size: clamp(60px, 26vw, 90px);
+  }
+
+  #loginForm {
+    margin-top: clamp(100px, 50vh, 100px);
+  }
+
+  .terminal {
+    width: 100%;
+    margin: 0;
+    box-shadow: 0 0 12px var(--crt-green);
+    min-height: calc((var(--vh, 1vh) * 100) - 4px);
+    height: calc((var(--vh, 1vh) * 100) - 4px);
+    font-size: 82px;
+  }
+
+  #login .p1,
+  #login .p2 {
+    line-height: 1.1;
+  }
+
+  #login .linea-centro span {
+    margin-top: clamp(16px, 5vh, 28px);
+    font-size: clamp(60px, 28vw, 90px);
+  }
+
+  .error {
+    font-size: clamp(52px, 22vw, 80px);
+  }
+
+  #sistema {
+    font-size: clamp(42px, 8vw, 64px);
+  }
+
+  #saludo {
+    font-size: clamp(46px, 9vw, 70px);
+  }
+
+  #login .linea-centro input {
+    width: 100%;
+    font-size: clamp(58px, 24vw, 84px);
+    margin-top: clamp(10px, 3vh, 20px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(38px, 7vw, 56px);
+    max-width: 94%;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .mensajeServidor {
+    font-size: clamp(30px, 5.5vw, 44px);
+    padding-left: 8px;
+    padding-right: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .mensajeServidorUnion {
+    margin-bottom: 24px;
+  }
+
+  .mensajeServidorSalida {
+    margin-top: 24px;
+  }
+
+  .mensajeAudioDirecto {
+    max-width: 96%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .audioDirecto {
+    gap: 12px;
+    padding: 14px 16px;
+    min-height: 120px;
+  }
+
+  .audioDirectoOndas {
+    height: 74px;
+  }
+
+  #opciones button {
+    font-size: clamp(38px, 7vw, 56px);
+  }
+
+  .fechaCapitulo {
+    font-size: clamp(30px, 5.6vw, 44px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(30px, 5.6vw, 44px);
+    padding: clamp(8px, 1.8vw, 14px) clamp(12px, 2.2vw, 18px);
+    gap: clamp(8px, 1.6vw, 12px);
+    letter-spacing: 0.07em;
+  }
+
+  .mensajeEstadoMicro::before {
+    width: clamp(10px, 1.8vw, 14px);
+    height: clamp(10px, 1.8vw, 14px);
+  }
+
+  #saludo {
+    margin-left: 2px;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 600px) {
+  #login {
+    font-size: clamp(52px, 18vw, 64px);
+  }
+
+  #loginForm {
+    margin-top: clamp(86px, 24vh, 150px);
+  }
+
+  #login .linea-centro span {
+    font-size: clamp(52px, 18vw, 64px);
+  }
+
+  #login .linea-centro input {
+    font-size: clamp(50px, 17vw, 62px);
+  }
+
+  .error {
+    font-size: clamp(42px, 13vw, 50px);
+  }
+
+  #sistema {
+    font-size: clamp(44px, 9vw, 62px);
+  }
+
+  #saludo {
+    font-size: clamp(48px, 10vw, 68px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(40px, 8.5vw, 58px);
+  }
+
+  .mensajeServidor {
+    font-size: clamp(31px, 6.6vw, 45px);
+  }
+
+  #opciones button {
+    font-size: clamp(40px, 8.5vw, 58px);
+  }
+
+  .fechaCapitulo {
+    font-size: clamp(30px, 6vw, 42px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(30px, 6vw, 42px);
+  }
+
+}
+
+@media (min-width: 769px) and (max-width: 1100px) and (orientation: portrait) {
+  body {
+    font-size: clamp(54px, 8vw, 78px);
+  }
+
+  #login {
+    font-size: clamp(56px, 8.4vw, 82px);
+  }
+
+  #loginForm {
+    margin-top: clamp(88px, 14vh, 150px);
+  }
+
+  .terminal {
+    font-size: 78px;
+  }
+
+  #login .linea-centro span {
+    font-size: clamp(56px, 8.4vw, 82px);
+  }
+
+  #login .linea-centro input {
+    font-size: clamp(54px, 8vw, 78px);
+  }
+
+  .error {
+    font-size: clamp(46px, 7vw, 66px);
+  }
+
+  #sistema {
+    font-size: clamp(40px, 6vw, 58px);
+  }
+
+  #saludo {
+    font-size: clamp(44px, 6.6vw, 64px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(36px, 5.2vw, 52px);
+  }
+
+  .mensajeServidor {
+    font-size: clamp(28px, 4vw, 40px);
+  }
+
+  #opciones button {
+    font-size: clamp(36px, 5.2vw, 52px);
+  }
+
+  .fechaCapitulo {
+    font-size: clamp(28px, 4.2vw, 40px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(28px, 4.2vw, 40px);
+    padding: clamp(8px, 1.3vw, 12px) clamp(12px, 1.8vw, 18px);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    line-height: 1.1;
+  }
+
+  .mensajeEstadoMicro::before {
+    width: clamp(11px, 1.35vw, 14px);
+    height: clamp(11px, 1.35vw, 14px);
+  }
+
+  .audioDirecto {
+    padding: 16px 20px;
+    min-height: 124px;
+  }
+
+  .audioDirectoOndas {
+    width: 96%;
+    height: 68px;
+    gap: 5px;
+  }
+
+  .audioDirectoOnda {
+    height: 40px;
+  }
+}
+
+@media (max-height: 760px) {
+  #loginForm {
+    margin-top: clamp(36px, 10vh, 72px);
+  }
+
+  #login .linea-centro span {
+    margin-top: clamp(10px, 3vh, 18px);
+  }
+
+  #login .linea-centro input {
+    font-size: clamp(46px, 14vw, 68px);
+    margin-top: clamp(8px, 2vh, 14px);
+  }
+
+  #sistema {
+    font-size: clamp(34px, 7vw, 50px);
+  }
+
+  #saludo {
+    font-size: clamp(38px, 8vw, 56px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(30px, 6.5vw, 46px);
+  }
+
+  .mensajeServidor {
+    font-size: clamp(23px, 5vw, 36px);
+  }
+
+  #opciones button {
+    font-size: clamp(30px, 6.5vw, 46px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(24px, 5.8vw, 36px);
+    padding: 7px 12px;
+  }
+
+  .mensajeEstadoMicro::before {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: clamp(48px, 13vw, 72px);
+  }
+
+  #login {
+    font-size: clamp(50px, 14vw, 74px);
+  }
+
+  #loginForm {
+    margin-top: clamp(20px, 20vh, 52px);
+  }
+
+  .terminal {
+    width: calc(100% - 8px);
+    margin: 4px auto;
+    min-height: calc((var(--vh, 1vh) * 100) - 8px);
+    height: calc((var(--vh, 1vh) * 100) - 8px);
+    padding: 10px;
+    font-size: 72px;
+  }
+
+  #login .linea-centro span {
+    font-size: clamp(50px, 14vw, 74px);
+  }
+
+  #login .linea-centro input {
+    font-size: clamp(50px, 15vw, 74px);
+  }
+
+  .error {
+    font-size: clamp(44px, 12vw, 66px);
+  }
+
+  #sistema {
+    font-size: clamp(34px, 9vw, 50px);
+  }
+
+  #saludo {
+    font-size: clamp(36px, 10vw, 54px);
+  }
+
+  .mensajeSistema,
+  .mensajeJugador {
+    font-size: clamp(30px, 8.4vw, 44px);
+  }
+
+  .mensajeServidor {
+    font-size: clamp(23px, 6.5vw, 34px);
+    letter-spacing: 0.03em;
+  }
+
+  .mensajeServidorUnion {
+    margin-bottom: 16px;
+  }
+
+  .mensajeServidorSalida {
+    margin-top: 16px;
+  }
+
+  #opciones button {
+    font-size: clamp(30px, 8.4vw, 44px);
+  }
+
+  #mensajes {
+    padding: 8px;
+  }
+
+  #opciones {
+    padding: 8px;
+  }
+
+  #opciones button {
+    min-height: 53px;
+  }
+
+  .fechaCapitulo {
+    font-size: clamp(24px, 6vw, 34px);
+  }
+
+  .mensajeEstadoMicro {
+    font-size: clamp(24px, 6vw, 34px);
+    padding: 6px 10px;
+    gap: 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .mensajeEstadoMicro::before {
+    width: 10px;
+    height: 10px;
+  }
+
+}

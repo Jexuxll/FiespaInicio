@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TERMINAL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="../Fiespa'26/favicon.png" type="image/png">
+</head>
+<body>
+
+<div class="terminal">
+
+  <!-- LOGIN -->
+  <div id="login">
+    <p class="p1">TERMINAL DE LABORATORIO</p>
+    <p class="p2">ACCESO RESTRINGIDO</p>
+
+    <form id="loginForm">
+      <div class="linea linea-centro">
+        <span>INTRODUZCA CLAVE</span>
+      </div>
+      <div class="linea linea-centro">
+        <input type="password" id="clave" class="inputNombre" required>
+      </div>
+
+      <button type="submit" class="submitOculto"></button>
+      <p id="error" class="error"></p>
+    </form>
+  </div>
+
+  <!-- CHAT DEL SISTEMA -->
+  <div id="sistema" class="oculto">
+    <p id="saludo"></p>
+
+    <div class="chat">
+      <div id="mensajes"></div>
+      <div id="opciones"></div>
+    </div>
+  </div>
+
+</div>
+
+<audio id="tecleo" preload="auto">
+  <source src="../audio/data1.mp3" type="audio/mpeg">
+</audio>
+
+<script src="inicio.js"></script>
+</body>
+</html>
