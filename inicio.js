@@ -54,6 +54,7 @@ if (sonidoTecla) {
 }
 
 let audioHabilitado = true;
+// let tecladoHabilitado = true;
 const audiosActivos = new Set();
 
 function detenerTodoAudio() {
@@ -267,6 +268,17 @@ if (btnReiniciar) {
   });
 }
 
+// BOTÓN MUTE TECLEO
+// const btnMute = document.getElementById("btnMute");
+// if (btnMute) {
+//   btnMute.addEventListener("click", () => {
+//     tecladoHabilitado = !tecladoHabilitado;
+//     btnMute.textContent = tecladoHabilitado ? "[AUDIO: ON]" : "[AUDIO: OFF]";
+//     btnMute.classList.toggle("silenciado", !tecladoHabilitado);
+//     btnMute.title = tecladoHabilitado ? "AUDIO: ON" : "AUDIO: OFF";
+//   });
+// }
+
 let escrituraEnCurso = null;
 
 function saltarAnimacionEscritura() {
@@ -354,7 +366,7 @@ function pedirNombre() {
 const capitulos = [
   {
     id: "CHAT_01",
-    fecha: "2026-01-01",
+    fecha: "2026-05-06",
     pasos: [
       {
         mensajes: [
@@ -437,7 +449,7 @@ const capitulos = [
 
   {
     id: "CHAT_02",
-    fecha: "2026-01-01",
+    fecha: "2026-05-08",
     pasos: [
       {
         mensajes: [
@@ -523,7 +535,7 @@ const capitulos = [
 
   {
     id: "CHAT_03",
-    fecha: "2026-05-02",
+    fecha: "2026-05-10",
     pasos: [
       {
         mensajes: [
@@ -630,7 +642,7 @@ const capitulos = [
 
   {
     id: "CHAT_04",
-    fecha: "2026-05-02",
+    fecha: "2026-05-12",
     pasos: [
       {
         mensajes: [
@@ -708,7 +720,7 @@ const capitulos = [
 
   {
     id: "CHAT_05",
-    fecha: "2026-05-03",
+    fecha: "2026-05-14",
     pasos: [
       {
         mensajes: [
@@ -1264,7 +1276,7 @@ function escribirTexto(div, texto, callback) {
 
       div.textContent = texto.substring(0, i) + "█";
 
-      if (texto[i] !== " " && audioHabilitado && sonidoTecla && !document.hidden) {
+      if (texto[i] !== " " && audioHabilitado && /*tecladoHabilitado &&*/ sonidoTecla && !document.hidden) {
         const clip = sonidoTecla.cloneNode(true);
         clip.volume = 0.15;
         clip.currentTime = 0;
