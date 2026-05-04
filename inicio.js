@@ -18,25 +18,49 @@ window.addEventListener("orientationchange", actualizarAlturaViewport);
 const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdnVUO847DbfLZRgosgbX6uupVWoaPryeoUuuZPyc-aR_xEUA/formResponse";
 const ENTRY_ALIAS = "entry.788093874";
 const ENTRY_CAPITULO = "entry.138641531";
-const ENTRY_RESPUESTA1 = "entry.1826188647";
-const ENTRY_RESPUESTA2 = "entry.454956127";
+const ENTRY_RESPUESTAS = [
+  "entry.1826188647",
+  "entry.454956127",
+  "entry.1458453985" // Rellena aquí el entry del 3er campo en Google Forms.
+];
 
-function enviarAGoogleForms(capId){
+function obtenerRespuestasCapitulo(capId, cantidadRespuestas) {
+  const respuestas = [];
+  for (let i = 1; i <= cantidadRespuestas; i++) {
+    respuestas.push(localStorage.getItem("opcion_" + capId + "_" + i) || "");
+  }
+  return respuestas;
+}
+
+function contarPasosConOpciones(capitulo) {
+  return capitulo.pasos.filter((paso) => Array.isArray(paso.opciones) && paso.opciones.length > 0).length;
+}
+
+function enviarAGoogleForms(capId, cantidadRespuestas = 2){
 
   const alias = localStorage.getItem("nombreJugador") || "Anonimo";
   const capitulo = capId;
+  const respuestas = obtenerRespuestasCapitulo(capId, cantidadRespuestas);
 
-  const r1 = localStorage.getItem("opcion_" + capId + "_1") || "";
-  const r2 = localStorage.getItem("opcion_" + capId + "_2") || "";
-
-  console.log("Enviando:", {alias, capitulo, r1, r2});
+  console.log("Enviando:", { alias, capitulo, respuestas });
 
   const datos = new URLSearchParams();
 
   datos.append(ENTRY_ALIAS, alias);
   datos.append(ENTRY_CAPITULO, capitulo);
-  datos.append(ENTRY_RESPUESTA1, r1);
-  datos.append(ENTRY_RESPUESTA2, r2);
+
+  respuestas.forEach((respuesta, index) => {
+    const entryId = ENTRY_RESPUESTAS[index];
+
+    if (!respuesta) return;
+
+    if (!entryId) {
+      console.warn("Falta configurar el ENTRY de Google Forms para la respuesta", index + 1);
+      return;
+    }
+
+    datos.append(entryId, respuesta);
+  });
 
   fetch(FORM_URL, {
     method: "POST",
@@ -1197,14 +1221,15 @@ function lanzarCapitulo(index, pasoInicial = 0){
         localStorage.setItem("paso_" + cap.id + "_" + pasoActual, "respondido");
         localStorage.setItem("opcion_" + cap.id + "_" + pasoActual, op.valor || op.texto);
 
-        // 🚀 ENVIAR CUANDO YA HAY 2 RESPUESTAS
-        const r1 = localStorage.getItem("opcion_" + cap.id + "_1");
-        const r2 = localStorage.getItem("opcion_" + cap.id + "_2");
+        // 🚀 Enviar cuando ya están todas las respuestas del capítulo.
+        const totalRespuestasCapitulo = contarPasosConOpciones(cap);
+        const respuestasCapitulo = obtenerRespuestasCapitulo(cap.id, totalRespuestasCapitulo);
+        const estanTodasLasRespuestas = respuestasCapitulo.every((respuesta) => Boolean(respuesta));
 
         const yaEnviado = localStorage.getItem("enviado_" + cap.id);
 
-        if(r1 && r2 && !yaEnviado){
-          enviarAGoogleForms(cap.id);
+        if(estanTodasLasRespuestas && !yaEnviado){
+          enviarAGoogleForms(cap.id, totalRespuestasCapitulo);
           localStorage.setItem("enviado_" + cap.id, "true");
         }
 

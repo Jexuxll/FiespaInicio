@@ -186,13 +186,16 @@ input {
   min-height: 0;
 }
 
+#sistema.oculto {
+  display: none;
+}
+
 #saludo {
   font-size: clamp(24px, 4.2vw, 55px);
   margin: 30px 0px 15px 0px;
   padding-bottom: 40px;
   color: #7fff7f;
   text-shadow: #7fff7f 0 0 4px;
-  border-bottom: #33ff33 2px solid;
 }
 
 #sistema.oculto #saludo {
@@ -601,6 +604,10 @@ button:hover{
     font-size: clamp(32px, 5.2vw, 48px);
   }
 
+  .inputNombre {
+    font-size: clamp(32px, 5.2vw, 48px);
+  }
+
   .fechaCapitulo {
     font-size: clamp(28px, 4vw, 40px);
   }
@@ -725,6 +732,10 @@ button:hover{
     font-size: clamp(38px, 7vw, 56px);
   }
 
+  .inputNombre {
+    font-size: clamp(38px, 7vw, 56px);
+  }
+
   .fechaCapitulo {
     font-size: clamp(30px, 5.6vw, 44px);
   }
@@ -788,6 +799,10 @@ button:hover{
     font-size: clamp(40px, 8.5vw, 58px);
   }
 
+  .inputNombre {
+    font-size: clamp(40px, 8.5vw, 58px);
+  }
+
   .fechaCapitulo {
     font-size: clamp(30px, 6vw, 42px);
   }
@@ -845,6 +860,10 @@ button:hover{
   }
 
   #opciones button {
+    font-size: clamp(36px, 5.2vw, 52px);
+  }
+
+  .inputNombre {
     font-size: clamp(36px, 5.2vw, 52px);
   }
 
@@ -913,6 +932,10 @@ button:hover{
   }
 
   #opciones button {
+    font-size: clamp(30px, 6.5vw, 46px);
+  }
+
+  .inputNombre {
     font-size: clamp(30px, 6.5vw, 46px);
   }
 
@@ -988,6 +1011,10 @@ button:hover{
   }
 
   #opciones button {
+    font-size: clamp(30px, 8.4vw, 44px);
+  }
+
+  .inputNombre {
     font-size: clamp(30px, 8.4vw, 44px);
   }
 
