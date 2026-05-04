@@ -365,8 +365,8 @@ function pedirNombre() {
 
 const capitulos = [
   {
-    id: "CHAT_01",
-    fecha: "2026-05-06",
+    id: "Capitulo_01",
+    fecha: "2026-05-05",
     pasos: [
       {
         mensajes: [
@@ -448,7 +448,7 @@ const capitulos = [
   },
 
   {
-    id: "CHAT_02",
+    id: "Capitulo_02",
     fecha: "2026-05-08",
     pasos: [
       {
@@ -534,7 +534,7 @@ const capitulos = [
   },
 
   {
-    id: "CHAT_03",
+    id: "Capitulo_03",
     fecha: "2026-05-10",
     pasos: [
       {
@@ -641,7 +641,7 @@ const capitulos = [
   },
 
   {
-    id: "CHAT_04",
+    id: "Capitulo_04",
     fecha: "2026-05-12",
     pasos: [
       {
@@ -719,7 +719,7 @@ const capitulos = [
   },
 
   {
-    id: "CHAT_05",
+    id: "Capitulo_05",
     fecha: "2026-05-14",
     pasos: [
       {
