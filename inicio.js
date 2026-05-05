@@ -1,4 +1,4 @@
-const CLAVE_SECRETA = "PABLO";
+const CLAVE_SECRETA = "luis";
 const USUARIO_POR_DEFECTO = "Usuario";
 let nombreJugador = localStorage.getItem("nombreJugador") || "";
 
@@ -774,10 +774,10 @@ const capitulos = [
   }
 ];
 
-const MENSAJE_CONEXION_CAPITULO = "> CONEXIóN ESTABLECIDA";
-const MENSAJE_DESCONEXION_CAPITULO = "> CONEXIóN FINALIZADA";
-const MENSAJE_SERVIDOR_UNION = "> Pablo_admin se ha unido a la sesión.";
-const MENSAJE_SERVIDOR_SALIDA = "> Pablo_admin se ha desconectó.";
+const MENSAJE_CONEXION_CAPITULO = "> CONEXIÓN ESTABLECIDA";
+const MENSAJE_DESCONEXION_CAPITULO = "> CONEXIÓN FINALIZADA";
+const MENSAJE_SERVIDOR_UNION = "> Pablo se ha conectado.";
+const MENSAJE_SERVIDOR_SALIDA = "> Pablo se ha desconectado.";
 
 // ===============================
 // ELEMENTOS
@@ -1583,5 +1583,3 @@ let guardandoChat = false;
 function guardarHistorial() {
   localStorage.setItem("chatHistorial", mensajesDiv.innerHTML);
 }
-
-// CAMBIAR INTRO Y FINAL
