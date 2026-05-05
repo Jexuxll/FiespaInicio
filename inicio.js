@@ -390,7 +390,7 @@ function pedirNombre() {
 const capitulos = [
   {
     id: "Capitulo_01",
-    fecha: "2026-05-05",
+    fecha: "2026-05-01",
     pasos: [
       {
         mensajes: [
@@ -473,7 +473,7 @@ const capitulos = [
 
   {
     id: "Capitulo_02",
-    fecha: "2026-05-08",
+    fecha: "2026-05-01",
     pasos: [
       {
         mensajes: [
@@ -522,24 +522,18 @@ const capitulos = [
           texto: "Dudar",
           valor: "IR +10",
           mensajes: [
-          "Esto da bastante mal rollo, Pablo", 
-          "Dime que no tocaste nada y te fuiste a tu casa",
+            "Esto da bastante mal rollo, Pablo", 
+            "Dime que no tocaste nada y te fuiste a tu casa",
           ]
-          //respuesta: [
-          //  "Pues me temo que si, lo toqué...",
-         // ]
         },
         {
           texto: "Curiosear",
           valor: "IR -10",
           mensajes: [
-          "¿Y qué hiciste?", 
-          "¿Te acercaste?",
-          "¿¿LO TOCASTE??"
+            "¿Y qué hiciste?", 
+            "¿Te acercaste?",
+            "¿¿LO TOCASTE??"
           ]
-         // respuesta: [
-        //  "Sí, me acerqué a ver que era ese \"bicho\"",
-         // ]
         }
       ],  
       respuesta: [ 
@@ -559,7 +553,7 @@ const capitulos = [
 
   {
     id: "Capitulo_03",
-    fecha: "2026-05-10",
+    fecha: "2026-05-01",
     pasos: [
       {
         mensajes: [
@@ -614,18 +608,18 @@ const capitulos = [
             texto: "Advertir del peligro",
             valor: "IR -10",
             mensajes: [
-            "Está claro que algo te infectó, Pablo", 
-            "Y algo chungo, además",
-            "Tienes que hacer algo YA"
+              "Está claro que algo te infectó, Pablo", 
+              "Y algo chungo, además",
+              "Tienes que hacer algo YA"
             ]
           },
           {
             texto: "Preguntar por los efectos",
             valor: "IR +10",
             mensajes: [
-            "¿Qué efectos secundarios?", 
-            "¿Buenos o malos?",
-            "Igual te conviertes en Venom jajaja"
+              "¿Qué efectos secundarios?", 
+              "¿Buenos o malos?",
+              "Igual te conviertes en Venom jajaja"
             ]
           }
         ],
@@ -644,19 +638,19 @@ const capitulos = [
             texto: "Buscar explicaciones",
             valor: "IR -10",
             mensajes: [
-            "Vale, ya veo que no me estás tomando el pelo", 
-            "Pero... Y la paranoia del principio?",
-            "¿No te perseguía alguien?"
+              "Vale, ya veo que no me estás tomando el pelo", 
+              "Pero... Y la paranoia del principio?",
+              "¿No te perseguía alguien?"
             ]
           },
           {
             texto: "Hartarse",
             valor: "IR +10",
             mensajes: [
-            "Vamos a ver, Pablo", 
-            "Suponiendo que esto sea real, que no lo es, pero bueno",
-            "¿Por qué cojones tanto misterio, si luego vas al trabajo tan pichi?",
-            "¿No te das cuenta de que no cuela?"
+              "Vamos a ver, Pablo", 
+              "Suponiendo que esto sea real, que no lo es, pero bueno",
+              "¿Por qué cojones tanto misterio, si luego vas al trabajo tan pichi?",
+              "¿No te das cuenta de que no cuela?"
             ]
           }
         ]
@@ -666,7 +660,7 @@ const capitulos = [
 
   {
     id: "Capitulo_04",
-    fecha: "2026-05-12",
+    fecha: "2026-05-01",
     pasos: [
       {
         mensajes: [
@@ -712,16 +706,16 @@ const capitulos = [
             texto: "Asustarse",
             valor: "IR +10",
             mensajes: [
-            "Pablo, me estás dando miedo",
-            "Hablas como si te hubieran lavado el cerebro"
+              "Pablo, me estás dando miedo",
+              "Hablas como si te hubieran lavado el cerebro"
             ]
           },
           {
             texto: "Escuchar",
             valor: "IR -10",
             mensajes: [
-            "Suena una locura, pero transmites mucha paz", 
-            "¿Y ahora qué vas a hacer?"
+              "Suena una locura, pero transmites mucha paz", 
+              "¿Y ahora qué vas a hacer?"
             ]
           }
         ],
@@ -743,32 +737,37 @@ const capitulos = [
   },
 
   {
-    id: "Capitulo_05",
-    fecha: "2026-05-14",
+     id: "Capitulo_05",
+    fecha: "2026-05-01",
+    mensajeConexionExtra: "> Mensaje programado entrante",
     pasos: [
       {
         mensajes: [
-          "Este es mi último mensaje.",
-          "El aire terrestre me quema los pulmones.",
-          "Ya no puedo respirar aquí arriba.",
-          "Me llevo la muestra.",
-          "O ella me lleva a mí.",
-          "He enviado las coordenadas físicas de la extracción a vuestro correo postal."
+        () => `Hola, ${(nombreJugador || "Usuario")}`,
+          "He tenido que dictar este mensaje para poder hablar contigo, mi estructura corporal actual no me permite teclear correctamente.",
+          "Lamentablemente ya no estoy aquí, he dejado este mensaje grabado. El aire se me hacía insoportable. Supongo que así es como debe ser.",
+          "Me gustaría explicarte mejor las cosas y ofrecerte una alternativa a la penosa realidad en la que vivimos.",
+          "Tendrás la oportunidad de ver de lo que soy capaz y solventar todas tus dudas antes de... \nBueno, antes de que todo cambie, digamos.",
+          "Recibirás una invitación por correo en los próximos días...\nNo faltes...\nAquí todo es mejor...",
+          "Un abrazo,\nPABLO."
         ]
       },
       {
         opciones: [
           {
-            texto: "...",
-            valor: "... 🤐",
+            texto: "Ir a la policía",
+            valor: "",
             mensajes: [
-              " "
+              "Decides hacer capturas de todo e ir ahora mismo a comisaría, pero aún así, esperas la oportunidad de poder despedirte una última vez"
+            ]
+          },
+          {
+            texto: "Aceptar lo inevitable",
+            valor: "",
+            mensajes: [
+              "La decisión de Pablo te deja pensativo. ¿A qué se refería con lo de que \"todo cambie\"? \nEsperas impaciente la carta",
             ]
           }
-        ],
-        respuesta: [
-            "Si vienes a las coordenadas, ven preparado para dejar tu piel seca atrás.",
-            "La marea no espera."
         ]
       }
     ]
@@ -926,6 +925,7 @@ function lanzarIntro(callback) {
 function comprobarNuevosCapitulos() {
 
   const hoy = new Date();
+  let todosCompletados = true;
 
   for (let i = 0; i < capitulos.length; i++) {
 
@@ -939,6 +939,8 @@ function comprobarNuevosCapitulos() {
       // 🔥 SI NO HA RESPONDIDO ESTE CAPÍTULO → LO REPRODUCIMOS DESDE 0
       if (!decision) {
 
+        todosCompletados = false;
+
         // SOLO si el anterior está completado
         if (i === 0 || localStorage.getItem("decision_" + anterior.id)) {
           lanzarCapitulo(i);
@@ -948,6 +950,8 @@ function comprobarNuevosCapitulos() {
       }
 
       // SI YA ESTÁ COMPLETADO → PASA AL SIGUIENTE
+    } else {
+      todosCompletados = false;
     }
   }
 }
@@ -986,6 +990,12 @@ function lanzarCapitulo(index, pasoInicial = 0){
       agregarMensajeJugador(texto, callback);
       return;
     }
+
+    if (tipoMensaje === "indicador") {
+      agregarIndicadorAccion(texto, callback);
+      return;
+    }
+
     agregarMensajeSistema(texto, callback);
   }
 
@@ -1113,8 +1123,17 @@ function lanzarCapitulo(index, pasoInicial = 0){
       agregarMensajeServidor(MENSAJE_CONEXION_CAPITULO, () => {
         setTimeout(() => {
           agregarMensajeServidor(MENSAJE_SERVIDOR_UNION, () => {
-            guardarHistorial();
-            ejecutarPaso();
+            if (cap.mensajeConexionExtra) {
+              setTimeout(() => {
+                agregarMensajeServidor(cap.mensajeConexionExtra, () => {
+                  guardarHistorial();
+                  ejecutarPaso();
+                }, "mensajeConexionExtra");
+              }, 260);
+            } else {
+              guardarHistorial();
+              ejecutarPaso();
+            }
           }, "mensajeServidorUnion");
         }, 260);
       });
@@ -1127,14 +1146,46 @@ function lanzarCapitulo(index, pasoInicial = 0){
         // Mensajes del servidor al finalizar cada capítulo
         if (!localStorage.getItem("cap_fin_servidor_" + cap.id)) {
           localStorage.setItem("cap_fin_servidor_" + cap.id, "mostrada");
-          agregarMensajeServidor(MENSAJE_SERVIDOR_SALIDA, () => {
-            setTimeout(() => {
-              agregarMensajeServidor(MENSAJE_DESCONEXION_CAPITULO, () => {
+          
+          // Comprobar si es el último capítulo
+          const esUltimoCapitulo = index === capitulos.length - 1;
+          
+          if (esUltimoCapitulo) {
+            // Mostrar mensaje de servidor estropeado usando el mismo sistema que el resto
+            const mensajesFinal = [
+              "> ERROR: CONEXIÓN PERDIDA",
+              "> SERVIDOR NO DISPONIBLE",
+              "> RECONECTANDO...",
+              "> FALLO CRÍTICO DEL SISTEMA",
+              "> EL SISTEMA SE AUTODESTRUIRÁ",
+            ];
+            
+            let msgIndex = 0;
+            const mostrarSiguiente = () => {
+              if (msgIndex < mensajesFinal.length) {
+                const msg = mensajesFinal[msgIndex];
+                const claseExtra = undefined;
+                msgIndex++;
+                agregarMensajeServidor(msg, () => {
+                  setTimeout(mostrarSiguiente, 220);
+                }, claseExtra);
+              } else {
                 guardarHistorial();
                 completarCapitulo();
-              });
-            }, 220);
-          }, "mensajeServidorSalida");
+              }
+            };
+            mostrarSiguiente();
+          } else {
+            // Mensajes normales de desconexión
+            agregarMensajeServidor(MENSAJE_SERVIDOR_SALIDA, () => {
+              setTimeout(() => {
+                agregarMensajeServidor(MENSAJE_DESCONEXION_CAPITULO, () => {
+                  guardarHistorial();
+                  completarCapitulo();
+                });
+              }, 220);
+            }, "mensajeServidorSalida");
+          }
           return;
         }
 
@@ -1237,10 +1288,11 @@ function lanzarCapitulo(index, pasoInicial = 0){
 
         // 🟢 MENSAJES DEL JUGADOR
         let i = 0;
+        const tipoMensajeJugador = cap.id === "Capitulo_05" ? "indicador" : "jugador";
 
         function escribirJugador(){
           if(i < op.mensajes.length){
-            procesarElementoSecuencia(op.mensajes[i], "jugador", ()=>{
+            procesarElementoSecuencia(op.mensajes[i], tipoMensajeJugador, ()=>{
               i++;
               setTimeout(escribirJugador, 300);
             });
@@ -1396,6 +1448,14 @@ function agregarMensajeServidor(texto, callback, claseExtra) {
 function agregarMensajeJugador(texto, callback) {
   const div = document.createElement("div");
   div.className = "mensajeJugador";
+  mensajesDiv.appendChild(div);
+
+  escribirTexto(div, texto, callback);
+}
+
+function agregarIndicadorAccion(texto, callback) {
+  const div = document.createElement("div");
+  div.className = "mensajeJugador mensajeIndicadorAccion";
   mensajesDiv.appendChild(div);
 
   escribirTexto(div, texto, callback);

@@ -127,9 +127,6 @@ input {
 .saludo-fila {
   display: flex;
   align-items: flex-start;
-  border-bottom: #33ff33 2px solid;
-  padding-bottom: 40px;
-  margin-bottom: 15px;
 }
 
 .saludo-fila #saludo {
@@ -139,8 +136,10 @@ input {
   padding-bottom: 0;
 }
 
-#sistema.oculto .saludo-fila {
-  display: none;
+#sistema:not(.oculto) .saludo-fila {
+  border-bottom: #33ff33 2px solid;
+  padding-bottom: 40px;
+  margin-bottom: 15px;
 }
 
 #btnMute {
@@ -246,6 +245,7 @@ input {
   max-width:80%;
   padding:2px 14px;
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .mensajeServidor {
@@ -258,12 +258,15 @@ input {
   width: 100%;
   box-sizing: border-box;
   line-height: 1.3;
-  white-space: normal;
+  white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
 }
 
 .mensajeServidorUnion {
+}
+
+.mensajeConexionExtra {
   margin-bottom: 38px;
 }
 
@@ -319,11 +322,70 @@ input {
   max-width:80%;
   padding:2px 14px;
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.mensajeIndicadorAccion {
+  align-self: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: clamp(18px, 4vh, 44px) 0;
+  padding: clamp(18px, 2.2vw, 26px) clamp(18px, 2.6vw, 30px) clamp(16px, 2vw, 22px);
+  border: 1px solid rgba(122, 255, 122, 0.56);
+  background:rgba(122, 255, 122, 0.07);
+  color: #e3ffe3;
+  font-size: var(--text-system);
+  text-align: center;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  box-sizing: border-box;
+  box-shadow:
+    0 0 24px rgba(51, 255, 51, 0.18),
+    inset 0 0 0 1px rgba(122, 255, 122, 0.14),
+    inset 0 0 22px rgba(44, 122, 44, 0.35);
+  position: relative;
+  animation: latidoIndicador 2.8s ease-in-out infinite;
+}
+
+.mensajeIndicadorAccion::before {
+  content: none;
+}
+
+.mensajeIndicadorAccion::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(164, 255, 164, 0.2);
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+  pointer-events: none;
+}
+
+@keyframes latidoIndicador {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(51, 255, 51, 0.14),
+      inset 0 0 0 1px rgba(122, 255, 122, 0.14),
+      inset 0 0 20px rgba(44, 122, 44, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 34px rgba(116, 255, 116, 0.2),
+      inset 0 0 0 1px rgba(168, 255, 168, 0.22),
+      inset 0 0 28px rgba(66, 168, 66, 0.35);
+  }
 }
 
 .mensajeSistema,
 .mensajeJugador{
   animation: aparecer 0.4s ease;
+}
+
+/* Garantiza que el indicador de acción siempre ocupe el ancho completo,
+   incluso cuando hereda la clase mensajeJugador (especificidad 0,2,0) */
+.mensajeJugador.mensajeIndicadorAccion {
+  align-self: stretch;
+  max-width: 100%;
+  width: 100%;
 }
 
 .mensajeTemporalOcultando {
@@ -638,6 +700,12 @@ button:hover{
   .mensajeJugador {
     max-width: 88%;
   }
+
+  .mensajeIndicadorAccion {
+    font-size: clamp(32px, 5.2vw, 48px);
+    padding: clamp(14px, 1.8vw, 20px) clamp(14px, 2vw, 22px) clamp(12px, 1.6vw, 18px);
+    margin: clamp(14px, 3vh, 34px) 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -698,6 +766,15 @@ button:hover{
     padding-right: 8px;
   }
 
+  .fechaCapitulo {
+    font-size: clamp(32px, 5.5vw, 46px);
+  }
+
+  .mensajeIndicadorAccion {
+    font-size: clamp(38px, 7vw, 56px);
+    padding: clamp(14px, 2.5vw, 20px) clamp(14px, 2.8vw, 22px) clamp(12px, 2.3vw, 18px);
+  }
+
   .mensajeServidor {
     font-size: clamp(30px, 5.5vw, 44px);
     padding-left: 8px;
@@ -706,6 +783,9 @@ button:hover{
   }
 
   .mensajeServidorUnion {
+  }
+
+  .mensajeConexionExtra {
     margin-bottom: 24px;
   }
 
@@ -812,6 +892,12 @@ button:hover{
     font-size: clamp(30px, 6vw, 42px);
   }
 
+  .mensajeIndicadorAccion {
+    font-size: clamp(40px, 8.5vw, 58px);
+    padding: clamp(12px, 2.4vw, 18px) clamp(12px, 2.6vw, 20px) clamp(10px, 2.2vw, 16px);
+    margin: clamp(10px, 2.6vh, 24px) 0;
+  }
+
 }
 
 @media (min-width: 769px) and (max-width: 1100px) and (orientation: portrait) {
@@ -899,6 +985,16 @@ button:hover{
   .audioDirectoOnda {
     height: 40px;
   }
+
+  .fechaCapitulo {
+    font-size: clamp(30px, 4.2vw, 44px);
+  }
+
+  .mensajeIndicadorAccion {
+    font-size: clamp(36px, 5.2vw, 52px);
+    padding: clamp(13px, 2vw, 20px) clamp(13px, 2.2vw, 22px) clamp(11px, 1.8vw, 17px);
+    margin: clamp(12px, 3vh, 32px) 0;
+  }
 }
 
 @media (max-height: 760px) {
@@ -949,6 +1045,16 @@ button:hover{
     width: 10px;
     height: 10px;
   }
+
+  .fechaCapitulo {
+    font-size: clamp(26px, 5vw, 38px);
+  }
+
+  .mensajeIndicadorAccion {
+    font-size: clamp(30px, 6.5vw, 46px);
+    padding: clamp(12px, 2vw, 18px) clamp(12px, 2.2vw, 18px) clamp(10px, 1.8vw, 15px);
+    margin: clamp(10px, 2.2vh, 22px) 0;
+  }
 }
 
 @media (max-width: 480px) {
@@ -998,12 +1104,24 @@ button:hover{
     font-size: clamp(30px, 8.4vw, 44px);
   }
 
+  .fechaCapitulo {
+    font-size: clamp(26px, 7vw, 38px);
+  }
+
+  .mensajeIndicadorAccion {
+    font-size: clamp(30px, 8.4vw, 44px);
+    padding: 14px 12px 12px;
+  }
+
   .mensajeServidor {
     font-size: clamp(23px, 6.5vw, 34px);
     letter-spacing: 0.03em;
   }
 
   .mensajeServidorUnion {
+  }
+
+  .mensajeConexionExtra {
     margin-bottom: 16px;
   }
 
