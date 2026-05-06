@@ -1583,5 +1583,3 @@ let guardandoChat = false;
 function guardarHistorial() {
   localStorage.setItem("chatHistorial", mensajesDiv.innerHTML);
 }
-localStorage.clear();
-location.reload();
