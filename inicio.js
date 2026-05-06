@@ -390,7 +390,7 @@ function pedirNombre() {
 const capitulos = [
   {
     id: "Capitulo_01",
-    fecha: "2026-05-01",
+    fecha: "2026-05-06",
     pasos: [
       {
         mensajes: [
@@ -473,7 +473,7 @@ const capitulos = [
 
   {
     id: "Capitulo_02",
-    fecha: "2026-05-01",
+    fecha: "2026-05-08",
     pasos: [
       {
         mensajes: [
@@ -553,7 +553,7 @@ const capitulos = [
 
   {
     id: "Capitulo_03",
-    fecha: "2026-05-01",
+    fecha: "2026-05-10",
     pasos: [
       {
         mensajes: [
@@ -660,7 +660,7 @@ const capitulos = [
 
   {
     id: "Capitulo_04",
-    fecha: "2026-05-01",
+    fecha: "2026-05-12",
     pasos: [
       {
         mensajes: [
@@ -738,7 +738,7 @@ const capitulos = [
 
   {
      id: "Capitulo_05",
-    fecha: "2026-05-01",
+    fecha: "2026-05-14",
     mensajeConexionExtra: "> Mensaje programado entrante",
     pasos: [
       {
@@ -756,14 +756,14 @@ const capitulos = [
         opciones: [
           {
             texto: "Ir a la policía",
-            valor: "",
+            valor: "IR +20",
             mensajes: [
               "Decides hacer capturas de todo e ir ahora mismo a comisaría, pero aún así, esperas la oportunidad de poder despedirte una última vez"
             ]
           },
           {
             texto: "Aceptar lo inevitable",
-            valor: "",
+            valor: "IR -20",
             mensajes: [
               "La decisión de Pablo te deja pensativo. ¿A qué se refería con lo de que \"todo cambie\"? \nEsperas impaciente la carta",
             ]
