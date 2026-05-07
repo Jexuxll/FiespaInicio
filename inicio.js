@@ -395,7 +395,7 @@ const capitulos = [
       {
         mensajes: [
           () =>`${nombreJugador || "Usuario"}, menos mal... Soy Pablo`,
-          "Tenía miedo de que no averiguases como entrar en el sistema",
+          "Tenía miedo de que no averiguases cómo entrar en el sistema",
           "Disculpa el rollo paranoico pero es la opción más segura en estos momentos"
         ]
       },
@@ -462,7 +462,7 @@ const capitulos = [
           "Llevo días sin dormir y me siento rarísimo...",
           { audio: "audio/lab.mp3", avisoSistema: formatearAvisoMicrofono("ACTIVO"), volumen: 0.7, desde: 0, duracion: 6 },
           "Mierda, viene alguien",
-          "No te imaginas desde donde te estoy escribiendo... Fliparías",
+          "No te imaginas desde dónde te estoy escribiendo... Fliparías",
           "Tengo que salir de aquí antes de que me pillen, pero volveré dentro de dos días",
           "Hablamos entonces, vale?",
           "No me dejes tirado, por favor..."
@@ -488,23 +488,23 @@ const capitulos = [
           texto: "Preocuparse",
           valor: "IR +10",
           mensajes: [
-            "Que coño dices Pablo?",
-            "Dejate de tonterias",
+            "Qué coño dices Pablo?",
+            "Déjate de tonterías",
             "Esto no es normal"
           ],
           respuesta: [
-            "Ya se que no es normal, por eso te lo estoy contando por aquí",
+            "Ya sé que no es normal, por eso te lo estoy contando por aquí",
           ]
         },
         {
-          texto: "Indigar",
+          texto: "Indagar",
           valor: "IR -10",
           mensajes: [
-            "Cuentame de una vez de qué va todo esto",
+            "Cuéntame de una vez de qué va todo esto",
             "Porque me estoy poniendo de los nervios",
           ],
           respuesta: [
-            "Tranquilizate, no quiero que te pongas nervioso",
+            "Tranquilízate, no quiero que te pongas nervioso",
           ]
         }
       ],
@@ -639,7 +639,7 @@ const capitulos = [
             valor: "IR -10",
             mensajes: [
               "Vale, ya veo que no me estás tomando el pelo", 
-              "Pero... Y la paranoia del principio?",
+              "Pero... y la paranoia del principio?",
               "¿No te perseguía alguien?"
             ]
           },
